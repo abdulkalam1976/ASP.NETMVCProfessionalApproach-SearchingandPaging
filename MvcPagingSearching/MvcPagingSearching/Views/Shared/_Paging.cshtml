@@ -1,0 +1,22 @@
+﻿@model PagedList.IPagedList
+@using PagedList.Mvc;
+@using System.Globalization;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@if (TempData.Peek("CurrentAction") == null)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchField = ViewBag.CurrentSearchField }))
+}
+else
+{
+    @Html.PagedListPager(Model, page => Url.Action(ViewBag.TagPagingAction,
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, searchField = ViewBag.CurrentSearchField }))
+}
+    
+    
+
+

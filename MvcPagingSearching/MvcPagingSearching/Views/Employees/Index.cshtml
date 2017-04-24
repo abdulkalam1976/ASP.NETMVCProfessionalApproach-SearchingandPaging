@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MvcPaging.Models.Employee>
+
+<h2>Employee Information</h2>
+
+@using (Ajax.BeginForm("Index", "Employees", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "#" }))
+{
+    @Html.Partial("~/Views/Shared/_Search.cshtml", new Model.Searchcriteria())
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Employee Code", "Index", new { searchField = "Employeecode", sortOrder = "Employeecode", currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { searchField = "Employeename", sortOrder = "Employeename", currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Address", "Index", new { searchField = "Address", sortOrder = "Address", currentFilter = ViewBag.CurrentFilter })
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employeecode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employeename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+@Html.Partial("~/Views/Shared/_Paging.cshtml", Model)

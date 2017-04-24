@@ -1,0 +1,19 @@
+﻿@model Model.Searchcriteria
+
+<p>
+    FindBy 
+    @Html.DropDownList("sortFieldO", (SelectList)ViewBag.SearchResult)
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    @Html.Hidden("searchField", ViewBag.CurrentSearchField as string)
+    <input type="submit" value="Search" />
+</p>
+
+<script>
+    $(document).ready(function () {
+        $("#searchField").val($("#sortFieldO").val());
+    });
+
+    $("#sortFieldO").change(function () {
+        $("#searchField").val($("#sortFieldO").val());
+    });
+</script>
